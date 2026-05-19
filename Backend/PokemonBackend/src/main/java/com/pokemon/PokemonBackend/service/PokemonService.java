@@ -13,8 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class PokemonService {
 
     private static final Logger log = LoggerFactory.getLogger(PokemonService.class);
-    
-    // TODO: Consider injecting RestTemplate as a bean instead of instantiating it directly
+
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Cacheable(value = "pokemon", key = "#name.toLowerCase()")

@@ -1,52 +1,40 @@
-import React from "react";
-
-const PokemonCard = (props) => {
-  const { pokeData } = props;
-
-  if (!pokeData) return null;
+function PokemonCard({ pokemon }) {
 
   return (
-    <div className="card p-3 text-center mx-auto" style={{ maxWidth: "320px", borderRadius: "15px", boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}>
-      <img
-        src={pokeData.sprites?.front_default}
-        alt={pokeData.name}
-        className="mx-auto mt-2"
-        style={{ width: "160px", imageRendering: "pixelated" }}
-      />
-
-      <h2 className="text-capitalize mt-3 fw-bold" style={{ color: "#333" }}>
-        {pokeData.name}
-      </h2>
-
-      <div className="d-flex justify-content-around my-3 text-muted">
-        <small><strong>ID:</strong> #{pokeData.id}</small>
-        <small><strong>HT:</strong> {pokeData.height}</small>
-        <small><strong>WT:</strong> {pokeData.weight}</small>
+    <div className="card mx-auto shadow-sm border-0 bg-secondary text-white" style={{ maxWidth: '400px' }}>
+      <div className="text-center bg-dark p-4 border-bottom border-secondary rounded-top">
+        <img
+          src={pokemon.sprites.front_default}
+          alt={pokemon.name}
+          className="img-fluid"
+        />
       </div>
 
-      <div className="mb-3">
-        <h5 className="text-secondary">Types</h5>
-        <div>
-          {pokeData.types?.map((typeObj) => (
-            <span key={typeObj.type.name} className="badge bg-primary m-1 px-3 py-2 rounded-pill shadow-sm">
-              {typeObj.type.name}
-            </span>
-          ))}
+      <div className="card-body">
+        <h2 className="text-center mb-4">{pokemon.name.toUpperCase()}</h2>
+
+        <div className="row text-center mb-4">
+          <div className="col">
+            <p className="small mb-1 text-light">Height</p>
+            <p className="fw-bold">{pokemon.height}</p>
+          </div>
+          <div className="col">
+            <p className="small mb-1 text-light">Weight</p>
+            <p className="fw-bold">{pokemon.weight}</p>
+          </div>
         </div>
-      </div>
 
-      <div>
-        <h5 className="text-secondary">Abilities</h5>
-        <div>
-          {pokeData.abilities?.map((abilityObj) => (
-            <span key={abilityObj.ability.name} className="badge bg-dark m-1 px-2 py-1">
-              {abilityObj.ability.name}
+        <h6 className="fw-bold text-light text-uppercase mb-2">Types</h6>
+        <div className="mb-4">
+          {pokemon.types.map(t => (
+            <span key={t.type.name} className="badge bg-dark border border-secondary me-2 text-capitalize px-3 py-2">
+              {t.type.name}
             </span>
           ))}
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default PokemonCard;

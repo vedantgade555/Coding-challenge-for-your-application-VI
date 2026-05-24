@@ -1,33 +1,31 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
-const SearchBar = ({ onSearch, isLoading }) => {
-  const [searchText, setSearchText] = useState('');
+function SearchBar({ onSearch }) {
 
-  const handleInputChange = (e) => {
-    setSearchText(e.target.value);
-  };
+  const [name, setName] = useState("");
 
-  const onSubmit = (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
-    if (searchText.trim() !== '') {
-      onSearch(searchText);
+    if(name.trim() !== "") {
+      onSearch(name);
     }
   };
 
   return (
-    <form onSubmit={onSubmit} className="d-flex justify-content-center mb-5">
+    <form onSubmit={handleSearch} className="d-flex justify-content-center mb-5">
       <input 
         type="text" 
-        className="form-control w-50 me-2" 
+        className="form-control bg-dark text-white border-secondary w-50 me-2" 
         placeholder="Enter pokemon name (e.g. pikachu)" 
-        value={searchText} 
-        onChange={handleInputChange} 
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
-      <button className="btn btn-primary px-4" type="submit" disabled={isLoading}>
-        {isLoading ? 'Searching...' : 'Search'}
+
+      <button type="submit" className="btn btn-primary px-4 fw-bold">
+        Search
       </button>
     </form>
   );
-};
+}
 
 export default SearchBar;
